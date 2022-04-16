@@ -7,6 +7,7 @@ import memories from './images/memories.png';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './styles';
+import './index.css';
 
 const App = () => {
   const classes = useStyles();
