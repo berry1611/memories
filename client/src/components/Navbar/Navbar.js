@@ -5,6 +5,7 @@ import { AppBar, Avatar, Toolbar, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 import memories from '../../images/memories.png';
 import { LOGOUT } from '../../constants/actionTypes';
+import decode from 'jwt-decode';
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -16,11 +17,16 @@ const Navbar = () => {
   const logout = () => {
     dispatch({ type: LOGOUT });
     setUser(null);
-    navigate('/');
+    navigate(0);
   };
 
   useEffect(() => {
     const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
