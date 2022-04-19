@@ -23,6 +23,7 @@ const Navbar = () => {
     const token = user?.token;
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
+
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -32,7 +33,7 @@ const Navbar = () => {
         <img src={memories} alt="memories" height="60" />
       </div>
       <Toolbar className={classes.toolbar}>
-        {user ? (
+        {user?.result ? (
           <div className={classes.profile}>
             <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>
               {user.result.name.charAt(0)}
